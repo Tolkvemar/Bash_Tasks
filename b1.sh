@@ -2,7 +2,7 @@
 
     if  [ -n "$1" ] ; then # Если скрипт запущен с ключем то:
         if [ "$1" = "--all" ]; then  # проверка ключа -> действие
-            subnetlist=$(ip route | grep -Ev 'default|10.66.0.0/16' | awk '{print $1}')
+            subnetlist=$(ip route | grep -Ev 'default' | awk '{print $1}')
             for subnet in $subnetlist; do
                 varsubnet="${subnet}"
                 nmap -sn --open $varsubnet | grep "Nmap scan report for" | awk '{print $5 $6}'
